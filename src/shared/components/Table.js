@@ -1,29 +1,15 @@
-import { IconButton, tableRowClasses } from "@mui/material";
-import React, { useState } from "react";
+import { IconButton } from "@mui/material";
+import React from "react";
 import styled from "styled-components";
 import { Paragraph } from "../Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import StarIcon from "@mui/icons-material/Star";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useHistory } from "react-router-dom";
+import { addFav, isFav } from "../../utils/AddFav";
+import FavSwitch from "./FavSwitch";
 
 const Table = ({ headerData, tableRowData }) => {
-  const addFav = (id) => {
-    const favObject = tableRowData?.find((tableData) => tableData?._id === id);
-
-    let arr = [];
-    if (favObject != null) {
-      if (!localStorage?.favItems) {
-        arr.push(favObject);
-        localStorage.setItem("favItems", JSON.stringify(arr));
-      } else {
-        let localStorageArr = JSON.parse(localStorage.favItems);
-        localStorageArr.push(favObject);
-        localStorage.setItem("favItems", JSON.stringify(localStorageArr));
-      }
-    }
-  };
-
+  const history = useHistory();
   return (
     <Container>
       {/* Header */}
@@ -90,12 +76,10 @@ const Table = ({ headerData, tableRowData }) => {
                   }}
                 />
               </IconButton>
-              <IconButton onClick={() => addFav(item?._id)}>
-                <StarIcon
-                  style={{
-                    color: "#001EB9",
-                  }}
-                />
+              <IconButton
+                onClick={() => addFav(item?._id, tableRowData, history)}
+              >
+                <FavSwitch isFav={isFav(item._id)} />
               </IconButton>
             </ButtonContainer>
           </TableRow>

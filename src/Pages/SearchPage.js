@@ -1,10 +1,23 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import ProductRow from "../components/ProductRow";
+import { SubHeading } from "../shared/Typography";
 
-const SearchPage = () => {
+const SearchPage = ({ products, searchTitle }) => {
   return (
-    <div>SearchPage</div>
-  )
-}
+    <Container>
+      <SubHeading color="#969191">{`${products?.length} found for ${searchTitle}`}</SubHeading>
+      {products?.map((item, index) => {
+        return <ProductRow item={item} key={index} />;
+      })}
+    </Container>
+  );
+};
 
-export default SearchPage
+export default SearchPage;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;

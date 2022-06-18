@@ -22,7 +22,7 @@ export const SubHeading = styled.div`
   letter-spacing: 0.1em;
   color: ${(props) => props.color};
   font-family: "Satoshi", sans-serif;
-  font-weight: normal;
+  font-weight: 800;
   @media (max-width: 800px) {
     font-size: 1.4rem;
     line-height: 1.4;
@@ -39,7 +39,6 @@ export const Paragraph = styled.div`
   font-weight: 600;
   color: ${(props) => props.color};
   line-height: 1.2rem;
-
   @media (max-width: 800px) {
     font-size: 0.8rem;
     line-height: 1.4rem;

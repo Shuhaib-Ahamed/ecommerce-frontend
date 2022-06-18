@@ -5,7 +5,13 @@ import Button from "./Button";
 
 const SearchBar = (props) => {
   return (
-    <Container id="search">
+    <Container
+      id="search"
+      onSubmit={(e) => {
+        e.preventDefault();
+        // props.setSearch(props.value);
+      }}
+    >
       <Input {...props} />
       <Button
         rounded

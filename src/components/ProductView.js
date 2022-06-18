@@ -24,11 +24,17 @@ const ProductView = () => {
     }
   };
 
-  console.log("products", products);
-
   useEffect(() => {
     getProducts();
   }, []);
+
+  useEffect(() => {
+    if (search != "") {
+      setView(2);
+    } else {
+      setView(0);
+    }
+  }, [search]);
 
   return (
     <Container>
@@ -87,7 +93,27 @@ const ProductView = () => {
               />
             );
           case 2:
-            return <SearchPage />;
+            return (
+              <SearchPage
+                searchTitle={search}
+                products={
+                  products?.length > 0 &&
+                  products?.filter((item) => {
+                    if (search === "") {
+                      return item;
+                    } else if (item._id && item._id.includes(search)) {
+                      return item;
+                    } else if (
+                      item.productName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return item;
+                    }
+                  })
+                }
+              />
+            );
 
           default:
             return null;
