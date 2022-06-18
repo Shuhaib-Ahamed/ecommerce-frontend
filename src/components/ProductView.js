@@ -4,16 +4,17 @@ import Button from "../shared/components/Button";
 import { Heading } from "../shared/Typography";
 import StarIcon from "@mui/icons-material/Star";
 import SearchBar from "../shared/components/SearchBar";
-import FavouriteProductPage from "../Pages/FavouriteProductPage";
 import SearchPage from "../Pages/SearchPage";
 import ProductPage from "../Pages/ProductPage";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import { getAllProducts } from "../api/api";
+import { useHistory } from "react-router-dom";
 
 const ProductView = () => {
   const [view, setView] = useState(0);
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState(null);
+  const history = useHistory();
 
   const getProducts = async () => {
     const response = await getAllProducts({
@@ -43,6 +44,9 @@ const ProductView = () => {
       </Heading>
       <ControlSection>
         <SearchBar
+          setProducts={setProducts}
+          name="searchInput"
+          id="search-input"
           color="#162427"
           placeholder="Search for Products"
           onChange={(e) => {
@@ -51,7 +55,12 @@ const ProductView = () => {
           value={search}
         />
         <ButtonContainer>
-          <Button label="New Product" />
+          <Button
+            label="New Product"
+            onClick={() => {
+              history.push("/add-new-product");
+            }}
+          />
           <Button
             onClick={() => {
               if (view === 0) {
@@ -83,10 +92,13 @@ const ProductView = () => {
       {(() => {
         switch (view) {
           case 0:
-            return <ProductPage products={products} />;
+            return (
+              <ProductPage products={products} setProducts={setProducts} />
+            );
           case 1:
             return (
               <ProductPage
+                setProducts={setProducts}
                 products={
                   localStorage?.favItems && JSON.parse(localStorage?.favItems)
                 }

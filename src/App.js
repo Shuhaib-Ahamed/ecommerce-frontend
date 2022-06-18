@@ -4,12 +4,14 @@ import Home from "./Pages/Home";
 import GuardedRoute from "./utils/GuardedRoute";
 import { authValidator } from "./utils/AuthValidator";
 import Login from "./Pages/Login";
+import AddNewProduct from "./Pages/AddNewProduct";
 
 function App() {
   return (
     <Container>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/add-new-product" component={AddNewProduct} />
         <GuardedRoute
           path="/"
           component={Home}

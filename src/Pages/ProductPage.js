@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { getAllProducts } from "../api/api";
 import Table from "../shared/components/Table";
 import { Paragraph } from "../shared/Typography";
 
-const ProductPage = ({ products }) => {
+const ProductPage = ({ products, setProducts }) => {
   const headerData = ["SKU", "IMAGE", "PRODUCT NAME", "PRICE", ""];
 
   return (
     <Container>
       {products?.length > 0 ? (
-        <Table headerData={headerData} tableRowData={products} />
+        <Table
+          headerData={headerData}
+          tableRowData={products}
+          setTableRowData={setProducts}
+        />
       ) : (
         <FlexRow>
           <Paragraph

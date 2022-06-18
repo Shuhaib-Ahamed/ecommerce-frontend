@@ -8,7 +8,7 @@ const SearchPage = ({ products, searchTitle }) => {
     <Container>
       <SubHeading color="#969191">{`${products?.length} found for ${searchTitle}`}</SubHeading>
       {products?.map((item, index) => {
-        return <ProductRow item={item} key={index} />;
+        return <ProductRow item={item} key={index} index={index} />;
       })}
     </Container>
   );

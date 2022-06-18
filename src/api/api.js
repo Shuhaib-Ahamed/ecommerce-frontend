@@ -54,6 +54,48 @@ export async function getAllProducts(data) {
   }
 }
 
+// GET PRODUCT BY ID//
+export async function deleteProductById(data) {
+  try {
+    const response = await axios.delete(PRODUCT_URL + data.id, {
+      headers: {
+        token: data.token,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// GET PRODUCT BY ID//
+export async function getProductById(data) {
+  try {
+    const response = await axios.get(PRODUCT_URL + `/find/${data.id}`, {
+      headers: {
+        token: data.token,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// EDIT PRODUCT BY ID//
+export async function editProductById(data) {
+  try {
+    const response = await axios.put(PRODUCT_URL + data.id, {
+      headers: {
+        token: data.token,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // GET USER SESSION //
 export function getUserSession() {
   if (localStorage.getItem("token") !== null) {

@@ -45,7 +45,7 @@ const Home = () => {
 
 export default Home;
 
-const Container = styled.div`
+export const Container = styled.div`
   padding: 2rem 3rem;
   display: flex;
   flex-direction: column;
