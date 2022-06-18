@@ -40,6 +40,20 @@ export async function getCurrentUser(data) {
   }
 }
 
+// GET ALL PRODUCTS//
+export async function getAllProducts(data) {
+  try {
+    const response = await axios.get(PRODUCT_URL, {
+      headers: {
+        token: data.token,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // GET USER SESSION //
 export function getUserSession() {
   if (localStorage.getItem("token") !== null) {

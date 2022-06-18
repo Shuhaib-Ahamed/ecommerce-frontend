@@ -30,7 +30,7 @@ const Header = ({ username }) => {
 export default Header;
 
 const Container = styled.header`
-  padding: 1rem 3rem;
+  padding: 1rem 0rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
