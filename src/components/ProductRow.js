@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { IconButton } from "@mui/material";
 
-const ProductRow = ({ item, index }) => {
+const ProductRow = ({ item }) => {
   return (
     <Container>
       <ContentContainer>
@@ -15,7 +15,7 @@ const ProductRow = ({ item, index }) => {
       <IconButton>
         <ArrowForwardIosIcon
           style={{
-            color: "#2403cb",
+            color: "#1f3bc4",
           }}
         />
       </IconButton>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Route } from "react-router-dom";
 import styled from "styled-components";
 import { getCurrentUser, getUserSession } from "../api/api";
 import ProductView from "../components/ProductView";
 import { ADD_USER_DETAILS } from "../redux/constants/ActionTypes";
 import store from "../redux/reducers";
 import Header from "../shared/Header";
+import AddNewProduct from "./AddNewProduct";
 
 const Home = () => {
   const [user, setUser] = useState(null);
@@ -38,7 +40,8 @@ const Home = () => {
   return (
     <Container>
       <Header username={user?.username} />
-      <ProductView />
+      <Route path="/add-new-product" component={AddNewProduct} />
+      <Route path="/" exact component={ProductView} />
     </Container>
   );
 };

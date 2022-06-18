@@ -11,7 +11,6 @@ function App() {
     <Container>
       <Switch>
         <Route path="/login" component={Login} />
-        <Route path="/add-new-product" component={AddNewProduct} />
         <GuardedRoute
           path="/"
           component={Home}

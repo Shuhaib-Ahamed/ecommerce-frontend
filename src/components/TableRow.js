@@ -16,21 +16,21 @@ const TableRow = ({ item, tableRowData, setTableRowData }) => {
   //Delete Product
   const handleDelete = async (id) => {
     setLoading(true);
+    const productIndex = tableRowData.findIndex((x) => x._id === id);
+    const productArr = [...tableRowData];
+    const localStorageArr = JSON.parse(localStorage.favItems);
+    const localIndex = localStorageArr.findIndex((x) => x._id === id);
+
     try {
-      let index = tableRowData?.findIndex((x) => x?._id === id);
       const response = await deleteProductById({
         id: id,
         token: `Bearer ${localStorage.token}`,
       });
-
       if (response.status === 200) {
-        let productArr = tableRowData;
-        let localStorageArr = JSON.parse(localStorage?.favItems);
-        productArr.splice(index, 1);
+        productArr.splice(productIndex, 1);
         setTableRowData(productArr);
         if (localStorageArr) {
-          let index = localStorageArr?.findIndex((x) => x?._id === id);
-          localStorageArr?.splice(index, 1);
+          localStorageArr.splice(localIndex, 1);
           localStorage.setItem("favItems", JSON.stringify(localStorageArr));
         }
       }
@@ -73,7 +73,7 @@ const TableRow = ({ item, tableRowData, setTableRowData }) => {
         {`$ ${item?.price}`}
       </Paragraph>
       <ButtonContainer>
-        <IconButton disabled={loading} onClick={() => handleDelete(item._id)}>
+        <IconButton disabled={loading} onClick={() => handleDelete(item?._id)}>
           {loading ? (
             <CircularProgress
               style={{
