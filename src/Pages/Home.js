@@ -8,6 +8,7 @@ import { ADD_USER_DETAILS } from "../redux/constants/ActionTypes";
 import store from "../redux/reducers";
 import Header from "../shared/Header";
 import AddNewProduct from "./AddNewProduct";
+import EditProduct from "./EditProduct";
 
 const Home = () => {
   const [user, setUser] = useState(null);
@@ -41,6 +42,7 @@ const Home = () => {
     <Container>
       <Header username={user?.username} />
       <Route path="/add-new-product" component={AddNewProduct} />
+      <Route path="/edit-product" component={EditProduct} />
       <Route path="/" exact component={ProductView} />
     </Container>
   );

@@ -59,7 +59,7 @@ const TableRow = ({ item, tableRowData, setTableRowData }) => {
         />
       </ImageWrapper>
       <Paragraph
-        minWidth="4rem"
+        minWidth="10rem"
         color="
       #162427"
       >
@@ -89,7 +89,14 @@ const TableRow = ({ item, tableRowData, setTableRowData }) => {
             />
           )}
         </IconButton>
-        <IconButton>
+        <IconButton
+          onClick={() => {
+            history.push({
+              pathname: "/edit-product",
+              state: item,
+            });
+          }}
+        >
           <EditIcon
             style={{
               color: "#001EB9",

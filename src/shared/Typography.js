@@ -8,11 +8,9 @@ export const Heading = styled.div`
   font-family: "Satoshi", sans-serif;
   color: ${(props) => props.color};
   font-weight: 900;
-  text-shadow: 0 10px 30px rgb(2 11 22 / 50%);
   @media (max-width: 800px) {
     font-size: 1.2rem;
-    margin-bottom: 0.8rem;
-    text-shadow: 0 3px 10px rgb(2 11 22 / 50%);
+
   }
 `;
 

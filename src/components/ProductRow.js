@@ -3,8 +3,10 @@ import { Paragraph, SubHeading } from "../shared/Typography";
 import styled from "styled-components";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { IconButton } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
 const ProductRow = ({ item }) => {
+  const history = useHistory();
   return (
     <Container>
       <ContentContainer>
@@ -12,7 +14,14 @@ const ProductRow = ({ item }) => {
         <SubHeading>{item?.productName}</SubHeading>
         <Paragraph color="#969191">{item?.productDescription}</Paragraph>
       </ContentContainer>
-      <IconButton>
+      <IconButton
+        onClick={() => {
+          history.push({
+            pathname: "/edit-product",
+            state: item,
+          });
+        }}
+      >
         <ArrowForwardIosIcon
           style={{
             color: "#1f3bc4",
