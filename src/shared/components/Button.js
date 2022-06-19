@@ -28,11 +28,11 @@ const Container = styled.button`
   background: ${(props) => (props.bordered ? "transparent" : "#001EB9")};
   outline: none;
   border: ${(props) => (props.bordered ? "1px solid #001EB9" : "unset")};
-  color: #fff;
+  color: ${(props) => (props.bordered ? "#1b1b1b" : "#fff")};
   cursor: pointer;
   font-size: 1rem;
   font-family: "Satoshi", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   color: ${(props) => props.color};
   &:hover {
     background: ${(props) => (props.bordered ? "transparent" : "#1f3bc4")};

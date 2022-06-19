@@ -21,7 +21,7 @@ const ImageBox = ({ item, images, setImages, index }) => {
         />
       </AbsoluteIcon>
       <ImageWrapper>
-        <Image src={item} />
+        <Image src={item?.preview ? item.preview : item} />
       </ImageWrapper>
     </Container>
   );

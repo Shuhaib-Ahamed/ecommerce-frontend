@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { addFav, isFav } from "../utils/AddFav";
 import styled from "styled-components";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { CircularProgress, IconButton } from "@mui/material";
+import { CircularProgress, IconButton, Modal } from "@mui/material";
 import { Paragraph } from "../shared/Typography";
 import { useHistory } from "react-router-dom";
 import FavSwitch from "../shared/components/FavSwitch";
 import { deleteProductById } from "../api/api";
+import ModalComponent from "./ModalComponent";
 
 const TableRow = ({ item, tableRowData, setTableRowData }) => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [openModal, setModalOpen] = useState(false);
 
   //Delete Product
   const handleDelete = async (id) => {
@@ -42,72 +44,76 @@ const TableRow = ({ item, tableRowData, setTableRowData }) => {
   };
 
   return (
-    <TableRowContainer>
-      <Paragraph
-        minWidth="4rem"
-        color="
+    <Fragment>
+      <ModalComponent
+        openModal={openModal}
+        setModalOpen={setModalOpen}
+        handleAction={() => handleDelete(item?._id)}
+        message="You will not be able to undo this action if you proceed!"
+      />
+
+      <TableRowContainer>
+        <Paragraph
+          minWidth="4rem"
+          color="
       #162427a2"
-      >
-        {item?.sku}
-      </Paragraph>
-      <ImageWrapper>
-        <Image
-          src={
-            "https://ipfs.infura.io/ipfs/QmXEgdq85Dfs1nj1DhaBi4BUTGweyNxGxenUPYJpnidSsw"
-          }
-          alt={item?.productName}
-        />
-      </ImageWrapper>
-      <Paragraph
-        minWidth="6rem"
-        color="
-      #162427"
-      >
-        {item?.productName}
-      </Paragraph>
-      <Paragraph
-        minWidth="4rem"
-        color="
-      #162427"
-      >
-        {`$ ${item?.price}`}
-      </Paragraph>
-      <ButtonContainer>
-        <IconButton disabled={loading} onClick={() => handleDelete(item?._id)}>
-          {loading ? (
-            <CircularProgress
-              style={{
-                color: "#001EB9",
-              }}
-              size={20}
-            />
-          ) : (
-            <DeleteIcon
-              style={{
-                color: "#001EB9",
-              }}
-            />
-          )}
-        </IconButton>
-        <IconButton
-          onClick={() => {
-            history.push({
-              pathname: "/edit-product",
-              state: item,
-            });
-          }}
         >
-          <EditIcon
-            style={{
-              color: "#001EB9",
+          {item?.sku}
+        </Paragraph>
+        <ImageWrapper>
+          <Image src={item.images[0]} alt={item?.productName} />
+        </ImageWrapper>
+        <Paragraph
+          minWidth="6rem"
+          color="
+      #162427"
+        >
+          {item?.productName}
+        </Paragraph>
+        <Paragraph
+          minWidth="4rem"
+          color="
+      #162427"
+        >
+          {`$ ${item?.price}`}
+        </Paragraph>
+        <ButtonContainer>
+          <IconButton disabled={loading} onClick={() => setModalOpen(true)}>
+            {loading ? (
+              <CircularProgress
+                style={{
+                  color: "#001EB9",
+                }}
+                size={20}
+              />
+            ) : (
+              <DeleteIcon
+                style={{
+                  color: "#001EB9",
+                }}
+              />
+            )}
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              history.push({
+                pathname: "/edit-product",
+                state: item,
+              });
             }}
-          />
-        </IconButton>
-        <IconButton onClick={() => addFav(item?._id, tableRowData, history)}>
-          <FavSwitch isFav={isFav(item._id)} />
-        </IconButton>
-      </ButtonContainer>
-    </TableRowContainer>
+          >
+            <EditIcon
+              style={{
+                color: "#001EB9",
+              }}
+            />
+          </IconButton>
+          <IconButton onClick={() => addFav(item?._id, tableRowData, history)}>
+            <FavSwitch isFav={isFav(item._id)} />
+          </IconButton>
+        </ButtonContainer>
+      </TableRowContainer>
+    </Fragment>
   );
 };
 

@@ -160,7 +160,7 @@ const ControlSection = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

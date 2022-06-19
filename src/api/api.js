@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 export const AUTH_URL = "http://localhost:8000/api/auth/";
 export const USER_URL = "http://localhost:8000/api/users/";
 export const PRODUCT_URL = "http://localhost:8000/api/products/";
+export const IMAGE_URL = "http://localhost:8000/api/upload/";
 
 // AUTH API REGISTER//
 export async function register(data) {
@@ -85,7 +86,7 @@ export async function getProductById(data) {
 // EDIT PRODUCT BY ID//
 export async function editProductById(data) {
   try {
-    const response = await axios.put(PRODUCT_URL + data.id, {
+    const response = await axios.put(PRODUCT_URL + data.id, data.body, {
       headers: {
         token: data.token,
       },
@@ -99,8 +100,21 @@ export async function editProductById(data) {
 // ADD PRODUCT BY ID//
 export async function addProduct(data) {
   try {
-    console.log(data.token, data.body);
     const response = await axios.post(PRODUCT_URL, data.body, {
+      headers: {
+        token: data.token,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// ADD IMAGE//
+export async function uploadImage(data) {
+  try {
+    const response = await axios.post(IMAGE_URL, +"image", data.body, {
       headers: {
         token: data.token,
       },
