@@ -96,6 +96,21 @@ export async function editProductById(data) {
   }
 }
 
+// ADD PRODUCT BY ID//
+export async function addProduct(data) {
+  try {
+    console.log(data.token, data.body);
+    const response = await axios.post(PRODUCT_URL, data.body, {
+      headers: {
+        token: data.token,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // GET USER SESSION //
 export function getUserSession() {
   if (localStorage.getItem("token") !== null) {

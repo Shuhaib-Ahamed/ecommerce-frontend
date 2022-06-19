@@ -14,6 +14,7 @@ const Table = ({ headerData, tableRowData, setTableRowData }) => {
               style={{ textTransform: "uppercase" }}
               color="#001EB9"
               key={index}
+              minWidth="5rem"
             >
               {item}
             </Paragraph>

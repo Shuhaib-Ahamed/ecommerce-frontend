@@ -44,7 +44,9 @@ const ProductView = () => {
       </Heading>
       <ControlSection>
         <SearchBar
+          type="text"
           setProducts={setProducts}
+          autocomplete="off"
           name="searchInput"
           id="search-input"
           color="#162427"
